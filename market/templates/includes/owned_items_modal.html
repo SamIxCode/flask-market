@@ -1,0 +1,29 @@
+<div class="modal fade" id="Selling_confirm_modal-{{ owned_items.id }}" tabindex="-1" role="dialog" aria-labelledby="infomodal" aria-hidden="true" style="color:black">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="infomodalLabel">
+             {{owned_items.name}}
+
+          </h3>
+          <button type="button" class="close-button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" style="color:black">
+          <form method="POST">
+            {{ selling_form.hidden_tag() }}
+            <h4 class="text-center display-4">
+              Remove from cart?
+            </h4>
+            <p class="font-weight-light"> {{owned_items.name}} will be removed from cart.<br/>{{ owned_items.price }}</p>
+            <input id="sold_item" name="sold_item" type="hidden" value="{{owned_items.name}}">
+            {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+          </form>
+        </div>
+        <div class="modal-footer">
+       
+        </div>
+      </div>
+    </div>
+  </div>

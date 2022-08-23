@@ -1,0 +1,69 @@
+{%extends "base.html"%}
+
+{%block title%}
+
+Market
+
+{%endblock%}
+
+{%block head%}
+<h1 class="bg-dark" style="color:white"></h1>
+
+{%endblock%}
+{%block content%}
+
+<div class="row" style="margin-top:20px; margin-left:20px;">
+  <div class="col-8">
+    <h2>Avalible items on the Market</h2>
+    <p>click on purchase to Start shopping</p>
+    <br>
+    <table class="table table-bordered table-dark">
+      <thead>
+        <tr>
+          <!--your collums are here-->
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">barcode</th>
+          <th scope="col">price</th>
+          <th scope="col">options</th>
+        </tr>
+      </thead>
+      <tbody> 
+        {%for items in items%} 
+          {%include 'includes/items_modals.html'%}
+        <tr>
+          <!--your data by rows-->
+          <td>{{items.id}}</td>
+          <td>{{items.name}}</td>
+          <td>{{items.barcode}}</td>
+          <td>{{items.price}}</td>
+          <td>{{items.count}}</td>
+          <td>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#infomodal-{{ items.id }}">More Info</button>
+            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Purchase-infomodal-{{ items.id }}">Purhcase Item</button>
+          </td>
+        </tr> {%endfor%} 
+      </tbody>
+    </table>
+  </div>
+  <div class="col-4" style="margin-top: 10px;">
+    <h2>Shoping cart</h2>
+    <p class="font-weight-bold">Items in your shopping cart</p>
+    <div class="row " style="margin-top: 25px;">
+      {% for owned_items in owned_items %}
+      {%include 'includes/owned_items_modal.html'%}
+      <div class="col-md-6">
+        <div style="margin-bottom: 5px;" class="card text-center bg-dark" style="color:white">
+          <h5>{{ owned_items.name }}</h5>
+          <p class="font-weight-normal">{{owned_items.description}}</p>
+          
+          <button type="submit" class="btn btn-outline-danger btn-sm" style="margin-bottom: 10px; margin-left: 5px; margin-right: 5px;" data-toggle="modal" data-target="#Selling_confirm_modal-{{ owned_items.id }}">Remove from cart<br/> <strong>{{owned_items.price}}</strong></button>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    <br>
+  </div>
+</div>
+  
+{%endblock%}
